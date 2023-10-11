@@ -1,6 +1,6 @@
 # **My Game Store**
 
-![gamestore.png](..%2Fgamestore.png)
+![gamestore.png](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fgamestore.png)
 
 # Project Properties
 
