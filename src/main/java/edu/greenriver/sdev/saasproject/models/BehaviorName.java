@@ -1,62 +1,86 @@
 package edu.greenriver.sdev.saasproject.models;
 
-import org.yaml.snakeyaml.events.Event;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
+
+@Getter
+@Entity
+@Data
+@NoArgsConstructor
 public class BehaviorName
 {
+
+    @jakarta.persistence.Id
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
     Boolean purchase;
-    Boolean play;
-    int percentage;
+    String name;
+    double price;
+    double hoursplayedaverage;
 
-    int hoursplayed;
-
-    public BehaviorName(Boolean purchase, Boolean play, int percentage, int hoursplayed) {
+    public BehaviorName(Boolean purchase, String name, double price, double hoursplayedaverage) {
+        this.name = name;
         this.purchase = purchase;
-        this.play = play;
-        this.percentage = percentage;
-        this.hoursplayed = hoursplayed;
+        this.price = price;
+        this.hoursplayedaverage = hoursplayedaverage;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Boolean getPurchase() {
         return purchase;
     }
 
-    public Boolean getPlay() {
-        return play;
+    public String getName() {
+        return name;
     }
 
-    public int getPercentage() {
-        return percentage;
+    public double getPrice() {
+        return price;
     }
 
-    public int getHoursplayed() {
-        return hoursplayed;
+    public double getHoursplayedaverage() {
+        return hoursplayedaverage;
     }
 
     public void setPurchase(Boolean purchase) {
         this.purchase = purchase;
     }
 
-    public void setPlay(Boolean play) {
-        this.play = play;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPercentage(int percentage) {
-        this.percentage = percentage;
+    public void setPrice(double percentage) {
+        this.price = percentage;
     }
 
-    public void setHoursplayed(int hoursplayed) {
-        this.hoursplayed = hoursplayed;
+    public void setHoursplayedaverage(double hoursplayed) {
+        this.hoursplayedaverage = hoursplayed;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     @Override
     public String toString() {
         return "BehaviorName{" +
                 "purchase=" + purchase +
-                ", play=" + play +
-                ", percentage=" + percentage +
-                ", hoursplayed=" + hoursplayed +
+                ", name=" + name +
+                ", percentage=" + price +
+                ", hoursplayed=" + hoursplayedaverage +
                 '}';
     }
+
 }
