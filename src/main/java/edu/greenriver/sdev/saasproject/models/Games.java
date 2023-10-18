@@ -1,7 +1,26 @@
 package edu.greenriver.sdev.saasproject.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+
+
+/**
+ *
+ */
+@Entity
+@Data
+@NoArgsConstructor
 public class Games
 {
+    @jakarta.persistence.Id
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private int id;
     String name;
     String Genres;
     String Platforms;
@@ -55,4 +74,12 @@ public class Games
                 ", Developers='" + Developers + '\'' +
                 '}';
     }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
 }

@@ -1,7 +1,10 @@
 package edu.greenriver.sdev.saasproject.models;
 
+import org.yaml.snakeyaml.events.Event;
+
 public class BehaviorName
 {
+    private int id;
     Boolean purchase;
     Boolean play;
     int percentage;
