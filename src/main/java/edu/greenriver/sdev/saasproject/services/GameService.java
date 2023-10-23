@@ -43,6 +43,9 @@ public class GameService
     {
         Games savedgame = getGamesById(updatedgame.getId());
         savedgame.setName(updatedgame.getName());
+        savedgame.setDevelopers(updatedgame.getDevelopers());
+        savedgame.setGenres(updatedgame.getGenres());
+        savedgame.setPlatforms(updatedgame.getPlatforms());
         savedgame = repo.save(savedgame);
 
         return savedgame;
