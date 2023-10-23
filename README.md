@@ -1,3 +1,7 @@
+Collection details
+URL for published documentation
+https://documenter.getpostman.com/view/30297455/2s9YRCXrUQ
+
 # **My Game Store**
 
 ![gamestore.png](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fgamestore.png)
