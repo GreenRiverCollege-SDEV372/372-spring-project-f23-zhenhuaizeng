@@ -30,26 +30,39 @@ public class GamesApi
     @PostMapping("games/add")
     public ResponseEntity<Games> addGame(@RequestBody Games game)
     {
-        return new ResponseEntity<>(service.addGame(game),HttpStatus.CREATED);
+            return new ResponseEntity<>(service.addGame(game),HttpStatus.CREATED);
     }
 
     @GetMapping("games/{gameId}")  //localhost:8080/games/3
-    public Games getGameById(@PathVariable int gameId)
+    public ResponseEntity<Games> getGameById(@PathVariable int gameId)
     {
-        return service.getGamesById(gameId);
+        if(service.GameExistById(gameId))
+        {
+            return new ResponseEntity<>(service.getGamesById(gameId),HttpStatus.FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 
-    //Change this to request body.
     @PutMapping("games/{gameId}")
-    public ResponseEntity<Games> addGameById(@PathVariable int gameId)
+    public ResponseEntity<Games> updatesaGameByID(@PathVariable int gameId)
     {
-        return new ResponseEntity<>(service.updateGame(service.getGamesById(gameId)),HttpStatus.NO_CONTENT);
+        if(service.GameExistById(gameId))
+        {
+            return new ResponseEntity<>(service.updateGameById(service.getGamesById(gameId)),HttpStatus.CREATED);
+        }
+       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("games/delete/{gameId}")
-    public void deleteGameById(@PathVariable int gameId)
+    public ResponseEntity<Games> deleteGameById(@PathVariable int gameId)
     {
-        service.deleteGame(gameId);
+        if(service.GameExistById(gameId))
+        {
+            service.deleteGame(gameId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
@@ -66,22 +79,37 @@ public class GamesApi
     }
 
     @GetMapping("behavior/{behaviorName}")
-    public BehaviorName getBehaviorById(@PathVariable String behaviorName)
+    public ResponseEntity<BehaviorName> getBehaviorById(@PathVariable String behaviorName)
     {
-        return serviceOne.getBehaviorByName(behaviorName);
+        if(serviceOne.behaviorExistsByName(behaviorName))
+        {
+            return new ResponseEntity<>(serviceOne.getBehaviorByName(behaviorName),HttpStatus.FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("behaviors")
-    public BehaviorName updatesBehaviorByName(@RequestBody BehaviorName behavior)
+    public ResponseEntity<BehaviorName> updatesBehaviorByName(@RequestBody BehaviorName behavior)
     {
-        return serviceOne.updateBehaviorByName(behavior);
+        if(serviceOne.behaviorExistsByName(behavior.getName()))
+        {
+            return new ResponseEntity<>(serviceOne.updateBehaviorByName(behavior),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("behaviorsDelete")
-    public void deleteJoke(@RequestBody BehaviorName behaviorName)
+    public ResponseEntity<BehaviorName> deleteJoke(@RequestBody BehaviorName behaviorName)
     {
-        serviceOne.deleteBehaviorByName(behaviorName.getName());
+
+        if(serviceOne.behaviorExistsByName(behaviorName.getName()))
+        {
+            serviceOne.deleteBehaviorByName(behaviorName.getName());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
 
 

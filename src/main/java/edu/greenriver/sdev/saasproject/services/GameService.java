@@ -39,7 +39,7 @@ public class GameService
         return games;
     }
 
-    public Games updateGame(Games updatedgame)
+    public Games updateGameById(Games updatedgame)
     {
         Games savedgame = getGamesById(updatedgame.getId());
         savedgame.setName(updatedgame.getName());
@@ -53,5 +53,9 @@ public class GameService
         repo.deleteById(id);
     }
 
+    public boolean GameExistById(int id)
+    {
+        return repo.findById(id).isPresent();
+    }
 
 }

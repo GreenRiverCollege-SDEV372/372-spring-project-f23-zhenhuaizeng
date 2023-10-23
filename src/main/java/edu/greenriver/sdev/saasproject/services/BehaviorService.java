@@ -58,4 +58,9 @@ public class BehaviorService
         repoOne.delete(behaviorName);
     }
 
+    public boolean behaviorExistsByName(String name)
+    {
+        return getBehaviorByName(name) != null;
+    }
+
 }
