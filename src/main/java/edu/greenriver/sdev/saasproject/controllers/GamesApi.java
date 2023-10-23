@@ -30,6 +30,11 @@ public class GamesApi
     @PostMapping("games/add")
     public ResponseEntity<Games> addGame(@RequestBody Games game)
     {
+        if(game.getName() == null || game.getId() < 0 || game.getDevelopers() == null
+        || game.getGenres() == null || game.getPlatforms() == null)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
             return new ResponseEntity<>(service.addGame(game),HttpStatus.CREATED);
     }
 
@@ -75,6 +80,11 @@ public class GamesApi
     @PostMapping("behavior/add")
     public ResponseEntity<BehaviorName> addBehavior(@RequestBody BehaviorName behavior)
     {
+        if(behavior.getName() == null || behavior.getId() < 0 || behavior.getHoursplayedaverage() < 0
+                || behavior.getPrice() < 0  || behavior.getPurchase() == null)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(serviceOne.addBehavior(behavior),HttpStatus.CREATED);
     }
 
