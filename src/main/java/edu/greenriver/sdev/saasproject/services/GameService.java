@@ -1,6 +1,6 @@
 package edu.greenriver.sdev.saasproject.services;
 
-/**
+/*
  * This is GameService class. this class is written that allow access to model objects. Create, Read, Update, and
  * Delete operations can be performed through methods in this class.
  * @author zhenhuai zeng
