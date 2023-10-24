@@ -96,8 +96,8 @@ public class BehaviorService
 
     /**
      * This method is checking the name that user put in to see if the name is in data.
-     * @param name
-     * @return
+     * @param name name
+     * @return check the name
      */
     public boolean behaviorExistsByName(String name)
     {
