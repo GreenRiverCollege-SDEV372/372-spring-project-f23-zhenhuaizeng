@@ -1,5 +1,12 @@
-package edu.greenriver.sdev.saasproject.models;
+/**
+ * This is BehaviorName class. it has five fields.
+ * @author zhenhuai zeng
+ * @version Java 21
+ * Date: 10/23/2023
+ */
 
+
+package edu.greenriver.sdev.saasproject.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +31,14 @@ public class BehaviorName
     double price;
     double hoursplayedaverage;
 
+    /**
+     *
+     * @param purchase purchase
+     * @param name name
+     * @param price price
+     * @param hoursplayedaverage hoursplayedaverage
+     * This constructor takes 4 parameters.
+     */
     public BehaviorName(Boolean purchase, String name, double price, double hoursplayedaverage) {
         this.name = name;
         this.purchase = purchase;
