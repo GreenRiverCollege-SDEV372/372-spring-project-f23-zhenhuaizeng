@@ -38,9 +38,9 @@ public class Games {
      */
     public Games(String name, String genres, String platforms, String developers) {
         this.name = name;
-        Genres = genres;
-        Platforms = platforms;
-        Developers = developers;
+        this.Genres = genres;
+        this.Platforms = platforms;
+        this.Developers = developers;
     }
 
 
