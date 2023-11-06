@@ -1,6 +1,6 @@
 window.onload = async function(){
     await fetchGames();
-    await fetchBehavior();
+    /* await fetchBehavior();*/
 }
 
 async function fetchGames()
@@ -12,12 +12,11 @@ async function fetchGames()
 
     let response = await fetch(uri,config);
     let json = await response.json();
-    let section = document.querySelector("#table");
+    let section = document.querySelector("table");
     for(let i = 0; i < json.length; i ++)
     {
         let element = json[i];
         addElement(element,section);
-        console.log(json[i]);
     }
 }
 async function fetchBehavior()
@@ -29,32 +28,35 @@ async function fetchBehavior()
 
     let response = await fetch(uri,config);
     let json = await response.json();
-    let section = document.querySelector("#table");
+    let section = document.getElementById("table");
     for(let i = 0; i < json.length; i ++)
     {
         let element = json[i];
         addBehavior(element,section);
-        console.log(json[i]);
     }
 }
 function addElement(element, section)
 {
     /*Game Objects*/
-    let id  = document.createElement("th");
-    let name = document.createElement("th");
-    let genres = document.createElement("th");
-    let platforms = document.createElement("th");
-    let developer = document.createElement("th");
-    id.innerText = "ID:" + element.id;
-    name.innerText = "Games' name: " + element.name;
-    genres.innerText = "Genres: " + element.genres;
-    platforms.innerText = "Platforms: " + element.platforms;
-    developer.innerText = "Developer: " + element.developers;
+    let id  = document.createElement("td");
+    let name = document.createElement("td");
+    let genres = document.createElement("td");
+    let platforms = document.createElement("td");
+    let developer = document.createElement("td");
+    let date = document.createElement("input");
+    date.setAttribute("type","date");
+    id.innerText = element.id;
+    name.innerText = element.name;
+    genres.innerText = element.genres;
+    platforms.innerText = element.platforms;
+    developer.innerText = element.developers;
     section.appendChild(id);
     section.appendChild(name);
+    section.appendChild(date);
     section.appendChild(genres);
     section.appendChild(platforms);
     section.appendChild(developer);
+    section.appendChild(document.createElement("tr"));
 }
 
 function addBehavior(behavior,section)
