@@ -5,9 +5,8 @@
     <title>Admin page</title>
     <link rel="stylesheet" href="css/adminStyle.css">
     <script src="js/load.js"></script>
-
-
 </head>
+<body>
 <form>
 
     <section class = "partOne">
@@ -22,26 +21,24 @@
         <input type="text" id="Developers" name="Developers"><br><br>
         <button id = "button">Add A Game</button>
     </section>
-    <section>
-        <table id = "myTable">
-            <tr id = "title">
-                <th>ID</th>
-                <th>Submitted</th>
-                <th>Game Name</th>
-                <th>Genres</th>
-                <th>Platforms</th>
-                <th>Developers</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            <tr class = "table">
-
-            </tr>
-        </table>
-
-
 </form>
-<body>
+<table id = "myTable">
+    <thead>
+    <tr id = "title">
+        <th>ID</th>
+        <th>Submitted</th>
+        <th>Game Name</th>
+        <th>Genres</th>
+        <th>Platforms</th>
+        <th>Developers</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody id = "row">
 
+    </tbody>
+
+</table>
 </body>
 </html>

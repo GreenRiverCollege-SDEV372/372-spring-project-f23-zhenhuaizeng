@@ -1,9 +1,144 @@
-window.onload = async function(){
+window.onload = async function() {
     await fetchGames();
-    await fetchBehavior();
-    clickCell();
+    //await fetchBehavior();
     let button = document.querySelector("#button");
     button.onclick = addRecord;
+    let deleteLinks = document.querySelectorAll(".delete");
+    for (let i = 0; i < deleteLinks.length; i++) {
+        deleteLinks[i].onclick = deleteHandler;
+    }
+    let editLinks = document.querySelectorAll(".edit");
+
+    for (let i = 0; i < editLinks.length; i++) {
+        editLinks[i].onclick = function(event) {
+
+            // Toggle the text content based on the current text
+            if (editLinks[i].textContent === 'Edit') {
+                editLinks[i].textContent = 'Save';
+                edit(event);
+            } else {
+                /*write code here*/
+
+                editLinks[i].textContent = 'Edit';
+                change(event);
+            }
+        };
+    }
+
+}
+async function change(event)
+{
+    let row = event.target.parentElement.parentElement;
+    let rows = document.querySelectorAll("tbody tr");
+    let editRecord = {
+        id: parseInt(row.children[0].textContent),
+        name : document.querySelector("input#Name").value,
+        genres :document.querySelector("input#genres").value,
+        platforms :document.querySelector("input#platforms").value,
+        developers : document.querySelector("input#developers").value
+    };
+    let uri = "http://localhost:8080/editGames";
+    let config =
+        {
+            method : "PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(editRecord)
+        };
+    console.log(editRecord);
+    let response = await fetch(uri,config);
+    let json =  await response.json();
+    let tdId = row.children[0];
+    for (let i = 0; i < rows.length; i++) {
+        let tr = rows[i];
+        //access the child elements of our <tr>?
+        if (tdId === tr.children[0]) {
+            tr.children[2].textContent = json.name;
+            tr.children[3].textContent = json.genres;
+            tr.children[4].textContent = json.platforms;
+            tr.children[5].textContent = json.developers;
+        }
+    }
+
+}
+function edit(event)
+{
+    let row = event.target.parentElement.parentElement;
+    let rows = document.querySelectorAll("tbody tr");
+    let tdId = row.children[0];
+    for (let i = 0; i < rows.length; i++) {
+        let tr = rows[i];
+        //access the child elements of our <tr>?
+
+        if (tdId === tr.children[0]) {
+            tr.children[2].innerHTML = '<td><input class = "change" id="Name"></td>';
+            tr.children[3].innerHTML = '<td><input class = "change" id="genres"></td>';
+            tr.children[4].innerHTML = '<td><input class = "change" id="platforms"></td>';
+            tr.children[5].innerHTML = '<td><input class = "change" id="developers"></td>';
+        }
+    }
+}
+
+/*
+*  using the input form. will need to change the selector for new edits
+*
+* */
+/*async function editLink(event)
+{
+    event.preventDefault();
+    let row = event.target.parentElement.parentElement;
+    let newEdit = {
+        //you have to say which row you want to do this.
+        id: parseInt(row.children[0].textContent),
+        name : document.querySelector("input#GName").value,
+        genres :document.querySelector("input#Genres").value,
+        platforms :document.querySelector("input#Platforms").value,
+        developers : document.querySelector("input#Developers").value
+    };
+    let uri = "http://localhost:8080/editGames";
+    let config = {
+        method: "put",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newEdit)
+    };
+    await fetch(uri, config);
+    let rows = document.querySelectorAll("tbody tr");
+    for (let i = 0; i < rows.length; i++) {
+        let tr = rows[i];
+        //access the child elements of our <tr>?
+        let tdId = tr.children[0];
+        let otherId = parseInt(tdId.textContent);
+
+        if (newEdit.id === otherId) {
+            tr.children[1].textContent = newEdit.name;
+            tr.children[2].textContent = newEdit.genres;
+            tr.children[3].textContent = newEdit.platforms;
+            tr.children[4].textContent = newEdit.developers;
+        }
+    }
+    location.reload();
+}*/
+
+async function deleteHandler(event) {
+    event.preventDefault();
+    let row = event.target.parentElement.parentElement;
+    let deleteId =
+        {
+            id: parseInt(row.children[0].textContent)
+        };
+    let uri = "http://localhost:8080/deleteGames";
+    let config = {
+        method: "delete",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(deleteId)
+    };
+    await fetch(uri, config);
+    location.reload();
 
 }
 
@@ -15,7 +150,6 @@ async function addRecord() {
         platforms :document.querySelector("input#Platforms").value,
         developers : document.querySelector("input#Developers").value
     };
-    console.log(newRecord);
     let uri = "http://localhost:8080/games/add";
     let config =
         {
@@ -27,13 +161,9 @@ async function addRecord() {
         };
     let response = await fetch(uri,config);
     let json =  await response.json();
-    let section = document.querySelector("#title");
+    let section = document.querySelector("#row");
     addElement(json,section);
-
 }
-
-
-
 
 async function fetchGames()
 {
@@ -44,7 +174,7 @@ async function fetchGames()
 
     let response = await fetch(uri,config);
     let json = await response.json();
-    let section = document.querySelector("table");
+    let section = document.querySelector("#row");
     for(let i = 0; i < json.length; i ++)
     {
         let element = json[i];
@@ -114,17 +244,18 @@ function addElement(element, section)
     genres.innerText = element.genres;
     platforms.innerText = element.platforms;
     developer.innerText = element.developers;
-    edit.innerHTML = '<a class = "edit" href = "#" > Edit </a>';
-    deletee.innerHTML= '<a class = "delete" href = "#"> Delete </a>';
-    section.appendChild(id);
-    section.appendChild(date);
-    section.appendChild(name);
-    section.appendChild(genres);
-    section.appendChild(platforms);
-    section.appendChild(developer);
-    section.appendChild(edit);
-    section.appendChild(deletee);
-    section.appendChild(document.createElement("tr"));
+    edit.innerHTML = '<td><a class = "edit" href = "#" > Edit </a></td>';
+    deletee.innerHTML= '<td><a class = "delete" href = "#"> Delete </a></td>';
+    let tableRow = document.createElement("tr");
+    tableRow.appendChild(id);
+    tableRow.appendChild(date);
+    tableRow.appendChild(name);
+    tableRow.appendChild(genres);
+    tableRow.appendChild(platforms);
+    tableRow.appendChild(developer);
+    tableRow.appendChild(edit);
+    tableRow.appendChild(deletee);
+    section.appendChild(tableRow);
 }
 
 function addBehavior(behavior,section)
@@ -157,17 +288,6 @@ function addBehavior(behavior,section)
     section.appendChild(document.createElement("tr"));
 }
 
-function clickCell() {
-    var edit = document.querySelectorAll(".edit");
-    for (let i = 0; i < edit.length; i++)
-    {
-        edit[i].addEventListener("click",function ()
-        {
-            edit[i].innerHTML = "save";
-        })
-    }
-}
-function addSingleGame()
-{
 
-}
+
+
