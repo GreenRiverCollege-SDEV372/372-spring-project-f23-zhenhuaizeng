@@ -7,38 +7,42 @@
     <script src="js/load.js"></script>
 </head>
 <body>
-<form>
+<h1>Admin Panel</h1>
+<hr>
+<h2>My Game Store</h2>
+<h2>Games' Info</h2>
+<div class="divOne">
+        <table id = "myTable">
+            <thead>
+            <tr id = "title">
+                <th>ID</th>
+                <th>Submitted</th>
+                <th>Game Name</th>
+                <th>Genres</th>
+                <th>Platforms</th>
+                <th>Developers</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody id = "row">
+            </tbody>
+        </table>
+    <form>
 
-    <section class = "partOne">
-        <h1>Add Request</h1>
-        <label for="GName">Game Name:</label>
-        <input type="text" id="GName" name="GName"><br><br>
-        <label for="Genres">Genres:</label>
-        <input type="text" id="Genres" name="Genres"><br><br>
-        <label for="Platforms">Platforms:</label>
-        <input type="text" id="Platforms" name="Platforms"><br><br>
-        <label for="Developers">Developers:</label>
-        <input type="text" id="Developers" name="Developers"><br><br>
-        <button id = "button">Add A Game</button>
-    </section>
-</form>
-<table id = "myTable">
-    <thead>
-    <tr id = "title">
-        <th>ID</th>
-        <th>Submitted</th>
-        <th>Game Name</th>
-        <th>Genres</th>
-        <th>Platforms</th>
-        <th>Developers</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody id = "row">
-
-    </tbody>
-
-</table>
+        <section class = "partOne">
+            <h1>Add Request</h1>
+            <label for="GName">Game Name:</label>
+            <input type="text" id="GName" name="GName"><br><br>
+            <label for="Genres">Genres:</label>
+            <input type="text" id="Genres" name="Genres"><br><br>
+            <label for="Platforms">Platforms:</label>
+            <input type="text" id="Platforms" name="Platforms"><br><br>
+            <label for="Developers">Developers:</label>
+            <input type="text" id="Developers" name="Developers"><br><br>
+            <button id = "button">Add A Game</button>
+        </section>
+    </form>
+</div>
 </body>
 </html>

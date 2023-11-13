@@ -11,14 +11,11 @@ window.onload = async function() {
 
     for (let i = 0; i < editLinks.length; i++) {
         editLinks[i].onclick = function(event) {
-
             // Toggle the text content based on the current text
             if (editLinks[i].textContent === 'Edit') {
                 editLinks[i].textContent = 'Save';
                 edit(event);
             } else {
-                /*write code here*/
-
                 editLinks[i].textContent = 'Edit';
                 change(event);
             }
@@ -80,48 +77,6 @@ function edit(event)
     }
 }
 
-/*
-*  using the input form. will need to change the selector for new edits
-*
-* */
-/*async function editLink(event)
-{
-    event.preventDefault();
-    let row = event.target.parentElement.parentElement;
-    let newEdit = {
-        //you have to say which row you want to do this.
-        id: parseInt(row.children[0].textContent),
-        name : document.querySelector("input#GName").value,
-        genres :document.querySelector("input#Genres").value,
-        platforms :document.querySelector("input#Platforms").value,
-        developers : document.querySelector("input#Developers").value
-    };
-    let uri = "http://localhost:8080/editGames";
-    let config = {
-        method: "put",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newEdit)
-    };
-    await fetch(uri, config);
-    let rows = document.querySelectorAll("tbody tr");
-    for (let i = 0; i < rows.length; i++) {
-        let tr = rows[i];
-        //access the child elements of our <tr>?
-        let tdId = tr.children[0];
-        let otherId = parseInt(tdId.textContent);
-
-        if (newEdit.id === otherId) {
-            tr.children[1].textContent = newEdit.name;
-            tr.children[2].textContent = newEdit.genres;
-            tr.children[3].textContent = newEdit.platforms;
-            tr.children[4].textContent = newEdit.developers;
-        }
-    }
-    location.reload();
-}*/
-
 async function deleteHandler(event) {
     event.preventDefault();
     let row = event.target.parentElement.parentElement;
@@ -142,7 +97,6 @@ async function deleteHandler(event) {
 
 }
 
-//show him the event.preventDefault();
 async function addRecord() {
     let newRecord = {
         name : document.querySelector("input#GName").value,
@@ -163,6 +117,7 @@ async function addRecord() {
     let json =  await response.json();
     let section = document.querySelector("#row");
     addElement(json,section);
+    location.reload();
 }
 
 async function fetchGames()
