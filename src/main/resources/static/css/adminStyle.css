@@ -1,12 +1,20 @@
+/*
+Names: Zhenhaui Zeng
+File Name: adminStyle.css
+Date: 11/15/2023
+Description: this is a style file. it adds different styles to the content.
+*/
+
+
 table{
     margin-right: 20px;
-    border: 1px solid black;
+    border: 1px solid brown;
 }
 th{
-    border: 1px solid black;
+    border: 1px solid brown;
 }
 td{
-    border: 1px solid black;
+    border: 1px solid brown;
 }
 .divOne{
     display:grid;
@@ -14,10 +22,11 @@ td{
 }
 .partOne
 {
-    border: solid 1px black;
+    border: solid 1px brown;
 }
 h1{
     text-align: center;
+    font-family: "Agency FB", serif;
 }
 html
 {
@@ -26,4 +35,10 @@ html
 h2{
     display: flow;
     align-content: flex-start;
+}
+#button
+{
+    background-color: blue;
+    margin-bottom: 50px;
+    margin-left: 100px;
 }

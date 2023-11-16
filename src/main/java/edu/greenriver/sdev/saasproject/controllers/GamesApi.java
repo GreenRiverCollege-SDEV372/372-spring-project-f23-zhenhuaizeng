@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("games")
 public class GamesApi
 {
     private final GameService service;
@@ -38,7 +39,7 @@ public class GamesApi
      * 200 (OK) - all games found and returned.
      */
 
-    @GetMapping("games")
+    @GetMapping("")
     public ResponseEntity<List<Games>> allGames()
     {
         return new ResponseEntity<>(service.getAllGames(), HttpStatus.OK);
@@ -50,7 +51,7 @@ public class GamesApi
      * 400 (BAD REQUEST) - No game created, one of the fields was empty.
      * Adds a new game object.
      */
-    @PostMapping("games/add")
+    @PostMapping("addition")
     public ResponseEntity<Games> addGame(@RequestBody Games game)
     {
         if(game.getName() == null || game.getId() < 0 || game.getDevelopers() == null
@@ -67,7 +68,7 @@ public class GamesApi
      * 404 (NOT FOUND) - Game not found.
      * Retrieves a game that matches the path variable id.
      */
-    @GetMapping("games/{gameId}")  //localhost:8080/games/3
+    @GetMapping("{gameId}")  //localhost:8080/games/3
     public ResponseEntity<Games> getGameById(@PathVariable int gameId)
     {
         if(service.GameExistById(gameId))
@@ -85,7 +86,7 @@ public class GamesApi
      * 400 (BAD REQUEST) - No game created, ID doesn't exist.
      * Edit a game object.
      */
-    @PutMapping("editGames")
+    @PutMapping("edition")
     public ResponseEntity<Games> updatesaGameByID(@RequestBody Games game)
     {
         if(service.GameExistById(game.getId()))
@@ -101,7 +102,7 @@ public class GamesApi
      * 404 (NOT FOUND) Can find the object that you are trying to delete.
      * Delete a game object that matches the variable id.
      */
-    @DeleteMapping("deleteGames")
+    @DeleteMapping("deletion")
     public ResponseEntity<Games> deleteGameById(@RequestBody Games name)
     {
         if(service.GameExistById(name.getId()))
