@@ -15,26 +15,44 @@
 * */
 window.onload = async function() {
     await fetchGames();
-    let button = document.querySelector("#button");
-    button.onclick = addRecord;
-    let deleteLinks = document.querySelectorAll(".delete");
-    for (let i = 0; i < deleteLinks.length; i++) {
-        deleteLinks[i].onclick = deleteHandler;
+    let button = document.getElementById("button");
+    let oldEditLinks = document.querySelectorAll(".edit");
+    let oldDeleteLinks = document.querySelectorAll(".delete");
+    for (let i = 0; i < oldDeleteLinks.length; i++) {
+        oldDeleteLinks[i].onclick = deleteHandler;
     }
-    let editLinks = document.querySelectorAll(".edit");
-
-    for (let i = 0; i < editLinks.length; i++) {
-        editLinks[i].onclick = function(event) {
-            // Toggle the text content based on the current text
-            if (editLinks[i].textContent==='Edit') {
-                editLinks[i].textContent='Save';
+    for (let i = 0; i < oldEditLinks.length; i++) {
+        oldEditLinks[i].onclick = function (event) {
+            if (oldEditLinks[i].textContent === 'Edit') {
+                oldEditLinks[i].textContent = 'Save';
                 editHandler(event);
             } else {
-                editLinks[i].textContent='Edit';
+                oldEditLinks[i].textContent = 'Edit';
                 change(event);
             }
         };
     }
+    button.addEventListener("click",async function (event) {
+        await addRecord(event);
+        let editLinks = document.querySelectorAll(".edit");
+        let deleteLinks = document.querySelectorAll(".delete");
+        for (let i = 0; i < deleteLinks.length; i++) {
+            deleteLinks[i].onclick = deleteHandler;
+        }
+        for (let i = 0; i < editLinks.length; i++) {
+            editLinks[i].onclick = function (event) {
+                if (editLinks[i].textContent === 'Edit') {
+                    editLinks[i].textContent = 'Save';
+                    editHandler(event);
+                } else {
+                    editLinks[i].textContent = 'Edit';
+                    change(event);
+                }
+            };
+        }
+
+    });
+
 }
 
 
@@ -129,7 +147,9 @@ async function deleteHandler(event) {
 *
 *
 * */
-async function addRecord() {
+async function addRecord(event) {
+    //this step is correct
+    event.preventDefault();
     let newRecord = {
         name : document.querySelector("input#GName").value,
         genres :document.querySelector("input#Genres").value,
@@ -149,7 +169,6 @@ async function addRecord() {
     let json =  await response.json();
     let section = document.querySelector("#row");
     addElement(json,section);
-    location.reload();
 }
 
 /*
