@@ -50,9 +50,7 @@ window.onload = async function() {
                 }
             };
         }
-
     });
-
 }
 
 
