@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gamestore-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      class: sdev372
+  template:
+    metadata:
+      labels:
+        class: sdev372
+    spec:
+      containers:
+        - name: gamestore-container
+          image: jackzzh123/gamestore
+          ports:
+            - containerPort: 8080
