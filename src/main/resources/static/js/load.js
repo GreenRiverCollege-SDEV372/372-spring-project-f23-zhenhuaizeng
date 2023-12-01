@@ -71,7 +71,7 @@ async function change(event)
         platforms :document.querySelector("input#platforms").value,
         developers : document.querySelector("input#developers").value
     };
-    let uri = "http://localhost:8080/games/edition";
+    let uri = window.location.origin + "/games/edition";
     let config =
         {
             method : "PUT",
@@ -127,7 +127,7 @@ async function deleteHandler(event) {
         {
             id: parseInt(row.children[0].textContent)
         };
-    let uri = "http://localhost:8080/games/deletion";
+    let uri = window.location.origin + "/games/deletion";
     let config = {
         method: "delete",
         headers: {
@@ -154,7 +154,7 @@ async function addRecord(event) {
         platforms :document.querySelector("input#Platforms").value,
         developers : document.querySelector("input#Developers").value
     };
-    let uri = "http://localhost:8080/games/addition";
+    let uri = window.location.origin + "/games/addition";
     let config =
         {
             method : "post",
@@ -212,7 +212,7 @@ function addElement(element, section)
 * */
 async function fetchGames()
 {
-    let uri = "http://localhost:8080/games";
+    let uri = window.location.origin + "/games";
     let config = {
         method : "get"
     };
